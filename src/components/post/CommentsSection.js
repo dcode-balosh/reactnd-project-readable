@@ -37,7 +37,7 @@ class CommentsSectionComponent extends Component {
                     <div className="container">
                         <div className="row">
                             {comments.map((comment) => (
-                                <ListComments comment={comment}/>
+                                <ListComments key={comment.id} comment={comment}/>
                             ))}
                         </div>
                     </div>
