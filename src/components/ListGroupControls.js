@@ -59,7 +59,6 @@ class ListGroupControls extends Component {
     }
 
     render() {
-        console.log(this.state.postSortBy);
         return (
             <div className="text-right">
                 <div className="btn-group">

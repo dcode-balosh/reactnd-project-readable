@@ -21,9 +21,6 @@ class Posts extends Component {
     render() {
         let {post, comments, location} = this.props;
         const commentsAnchor = 'commentsHeaderId';
-        {
-            console.log(this.props)
-        }
 
         if (undefined === post) {
             return (<div>Loading</div>)
