@@ -2,7 +2,7 @@ import React, {Component} from "react";
 
 class ListGroupControls extends Component {
     sortByVoteScore = (arr) => {
-        return arr.length === 0
+            return arr.length === 0
             ? arr
             : arr.sort(
                 (a, b) =>
@@ -24,6 +24,17 @@ class ListGroupControls extends Component {
 
     };
 
+    handleSortByVoteScore = (e) => {
+        e.preventDefault();
+        this.props.sortBy(this.sortByVoteScore);
+    };
+
+    handleSortByTimeStampClick = (e) => {
+        e.preventDefault();
+        this.props.sortBy(this.sortByTimeStamp);
+    };
+
+
     componentDidMount(){
         this.props.sortBy(this.sortByVoteScore);
     }
@@ -33,10 +44,16 @@ class ListGroupControls extends Component {
         return (
             <div className="text-right">
                 <div className="btn-group">
-                    <a href="#" className="btn btn-outline-primary">Score <i
-                        className="fa fa-sort-numeric-desc" aria-hidden="true"/></a>
-                    <a href="#" className="btn btn-outline-primary">Time <i
-                        className="fa fa-sort-numeric-desc" aria-hidden="true"/></a>
+                    <a href="?postSortBy=voteScore"
+                       className="btn btn-outline-primary"
+                       onClick={this.handleSortByVoteScore}>
+                        Score
+                        <i className="fa fa-sort-numeric-desc" aria-hidden="true"/></a>
+                    <a href="?postSortBy=timeStamp"
+                       className="btn btn-outline-primary"
+                       onClick={this.handleSortByTimeStampClick}>
+                        Time
+                        <i className="fa fa-sort-numeric-desc" aria-hidden="true"/></a>
                     <a href="#" className="btn btn-outline-primary">New <i className="fa fa-plus"
                                                                            aria-hidden="true"/></a>
                 </div>
