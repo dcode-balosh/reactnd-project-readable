@@ -6,18 +6,17 @@ class Posts extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sort: (arr) => arr,
-            dispatch: props.dispatch
+            sort: (arr) => arr
         };
     }
 
     onDeleteClick(modal,id) {
         switch(modal){
             case "post":
-                Api.deletePost(this.state.dispatch,id);
+                Api.deletePost(this.props.dispatch,id);
                 break;
             case "comment":
-                Api.deleteComment(this.state.dispatch,id);
+                Api.deleteComment(this.props.dispatch,id);
                 break;
             default:
                 console.log(`Error no such modal ${modal}`)
@@ -27,10 +26,10 @@ class Posts extends Component {
     onUpvoteClick(modal,id) {
         switch(modal){
             case "post":
-                Api.votePost(this.state.dispatch,id,'upVote');
+                Api.votePost(this.props.dispatch,id,'upVote');
                 break;
             case "comment":
-                Api.voteComment(this.state.dispatch,id,'upVote');
+                Api.voteComment(this.props.dispatch,id,'upVote');
                 break;
             default:
                 console.log(`Error no such modal ${modal}`)
@@ -41,10 +40,10 @@ class Posts extends Component {
     onDownvoteClick(modal,id) {
         switch(modal){
             case "post":
-                Api.votePost(this.state.dispatch,id,'downVote');
+                Api.votePost(this.props.dispatch,id,'downVote');
                 break;
             case "comment":
-                Api.voteComment(this.state.dispatch,id,'downVote');
+                Api.voteComment(this.props.dispatch,id,'downVote');
                 break;
             default:
                 console.log(`Error no such modal ${modal}`)
