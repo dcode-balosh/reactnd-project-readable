@@ -25,8 +25,15 @@ export const getCategoryPost = (categoryId) =>
 
 
 export const getPosts = () =>
-    fetch(`${api}/posts`, { headers })
-        .then(res => res.json());
+    fetch(`${api}/posts`, {headers})
+        .then(res => (res.json()).then(
+            (data) => {
+                return data.reduce((acu, cur) => {
+                    acu[cur.id] = cur;
+                    return acu
+                }, {})
+            }));
+
 
 export const newPost = (title, body, author, category) =>
     fetch(`${api}/posts}`, {
@@ -57,11 +64,9 @@ export const votePost = (dispatch,postId,option) =>
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            option
+            option: option
         })
-    }).then(res => res.json()).then( () => {
-        updatePostsState(dispatch)
-    } );
+    }).then(res => updatePostsState(dispatch));
 
 export const updatePost = (postId,title,body) =>
     fetch(`${api}/posts/${postId}`, {
@@ -84,10 +89,7 @@ export const deletePost = (dispatch,postId) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({})
-    }).then(res => res.json()).then( () => {
-        updatePostsState(dispatch)
-    } );
-
+    }).then(res => updatePostsState(dispatch));
 };
 
 export const getPostComments = (postId) =>

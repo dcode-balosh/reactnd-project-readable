@@ -17,12 +17,10 @@ class Posts extends Component {
     }
 
     onUpvoteClick(id) {
-        alert(`upvoting ${id}`)
         Api.votePost(this.state.dispatch,id,'upVote');
     }
 
     onDownvoteClick(id) {
-        alert(`downvoting ${id}`)
         Api.votePost(this.state.dispatch,id,'downVote');
     }
 
@@ -46,9 +44,9 @@ class Posts extends Component {
                           commentsLength={comments.length}
                           commentsAnchor={commentsAnchor}
                           location={location}
-                          onDeleteClick={this.onDeleteClick}
-                          onUpvoteClick={this.onUpvoteClick}
-                          onDownvoteClick={this.onDownvoteClick}
+                          onDeleteClick={this.onDeleteClick.bind(this)}
+                          onUpvoteClick={this.onUpvoteClick.bind(this)}
+                          onDownvoteClick={this.onDownvoteClick.bind(this)}
                 />
                 <CommentsSectionComponent
                     comments={comments}
