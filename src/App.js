@@ -9,6 +9,7 @@ import PostContainer from "./containers/PostContainer";
 import FormContainer from "./containers/FormContainer";
 import {init} from "./actions/index";
 import * as Api from './Api'
+import AppHeader from "./components/Header";
 
 class App extends Component {
 
@@ -46,6 +47,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" render={({location}) =>
                             <div className="App">
+                                <ColMd12><AppHeader/></ColMd12>
                                 <div className="page-header text-center"><h1>Readable</h1></div>
                                 <ColMd12><CategoriesContainer location={location}/></ColMd12>
                                 <ColMd12><PostsContainer location={location}/></ColMd12>
@@ -53,6 +55,7 @@ class App extends Component {
                         }/>
                         <Route exact path="/categories/:category" render={({location, match}) =>
                             <div className="App">
+                                <ColMd12><AppHeader/></ColMd12>
                                 <div className="page-header text-center"><h1>{match.params.category}</h1></div>
                                 <ColMd12><CategoriesContainer location={location}/></ColMd12>
                                 <ColMd12><PostsContainer location={location}
@@ -61,12 +64,14 @@ class App extends Component {
                         }/>
                         <Route exact path="/posts/new" render={({history,location, match}) =>
                             <div className="App">
+                                <ColMd12><AppHeader/></ColMd12>
                                 <FormContainer modal='posts'
                                                onNewPostSubmit={this.onNewPostSubmit.bind(this,history)}/>
                             </div>
                         }/>
                         <Route exact path="/:category/:postId/edit" render={({history,location, match}) =>
                             <div className="App">
+                                <ColMd12><AppHeader/></ColMd12>
                                 <FormContainer modal='posts'
                                                onNewPostSubmit={this.onEditPostSubmit.bind(this, history,
                                                    match.params.category,
@@ -76,6 +81,7 @@ class App extends Component {
                         }/>
                         <Route exact path="/:category/:postId" render={({location, match}) =>
                             <div className="App">
+                                <ColMd12><AppHeader/></ColMd12>
                                 <PostContainer location={location}
                                                postId={match.params.postId}
                                 />
@@ -84,6 +90,7 @@ class App extends Component {
                         <Route exact path="/:category/:postId/comments/:commentId/edit"
                                render={({history, location, match}) =>
                                    <div className="App">
+                                       <ColMd12><AppHeader/></ColMd12>
                                        <FormContainer modal='comments'
                                                       onNewPostSubmit={this.onEditCommentsSubmit.bind(this, history,
                                                           match.params.category,
@@ -94,6 +101,7 @@ class App extends Component {
                                }/>
                         <Route exact path="/:category/:postId/comments/new" render={({history, location, match}) =>
                             <div className="App">
+                                <ColMd12><AppHeader/></ColMd12>
                                 <FormContainer modal='comments'
                                                onNewPostSubmit={this.onNewCommentsSubmit.bind(this, history,
                                                    match.params.category,
