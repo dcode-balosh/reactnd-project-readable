@@ -17,8 +17,7 @@ class Posts extends Component {
                 Api.deletePost(this.state.dispatch,id);
                 break;
             case "comment":
-                alert('onDeleteClick comment')
-                // Api.deleteComment(this.state.dispatch,id);
+                Api.deleteComment(this.state.dispatch,id);
                 break;
             default:
                 console.log(`Error no such modal ${modal}`)

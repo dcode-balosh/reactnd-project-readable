@@ -11,3 +11,9 @@ export const updateComments = (comments) => ({
     type: 'UPDATE_COMMENTS',
     comments
 });
+export const emptyComments = () => ({
+    type: 'EMPTY_COMMENTS'
+});
+
+
+

@@ -108,7 +108,13 @@ export const deletePost = (dispatch,postId) => {
 
 export const getPostComments = (postId) =>
     fetch(`${api}/posts/${postId}/comments`, { headers })
-        .then(res => res.json());
+        .then(res => res.json().then(
+            (data) => {
+                return data.reduce((acu, cur) => {
+                    acu[cur.id] = cur;
+                    return acu
+                }, {})
+            }));
 
 export const newComment = (body,author,parentId) =>
     fetch(`${api}/comments}`, {
@@ -152,15 +158,15 @@ export const updateComment = (commentId,body) =>
         })
     }).then(res => res.json());
 
-export const deleteComment = (commentId) =>
-    fetch(`${api}/comments/${commentId.id}`, {
+export const deleteComment = (dispatch,commentId) =>
+    fetch(`${api}/comments/${commentId}`, {
         method: 'DELETE',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({})
-    }).then(res => res.json());
+    }).then(res => updateCommentsState(dispatch));
 
 
 export const updatePostsState = (dispatch) => {
@@ -169,11 +175,12 @@ export const updatePostsState = (dispatch) => {
     )
 };
 export const updateCommentsState = (dispatch) => {
-    getPosts().then(posts =>
-        Object.keys(posts).map((postId) => {
+    getPosts().then(posts => {
+        dispatch(Actions.emptyComments());
+        return Object.keys(posts).map((postId) => {
                 return getPostComments(postId).then(comments =>
                     dispatch(Actions.updateComments(comments)))
             }
         )
-    )
+    })
 };
