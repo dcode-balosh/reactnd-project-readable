@@ -35,9 +35,11 @@ class ListComments extends Component {
                                         <i className="fa fa-pencil" aria-hidden="true"/>
                                     </NavLink>
                                 </div>
-                                <NavLink excact to={{search: `?deletedComment=${comment.id}`}} onClick={() => onDeleteClick(comment.id)}>
-                                    <i className="fa fa-eraser" aria-hidden="true"/>
-                                </NavLink>
+                                <div className="col-md-3">
+                                    <NavLink excact to={{search: `?deletedComment=${comment.id}`}} onClick={() => onDeleteClick(comment.id)}>
+                                        <i className="fa fa-eraser" aria-hidden="true"/>
+                                    </NavLink>
+                                </div>
                                 <div className="col-md-3">
                                     <NavLink excact to={{search: `?upvotedComment=${comment.id}`}} onClick={() => onUpvoteClick(comment.id)}>
                                         <i className="fa fa-thumbs-o-up" aria-hidden="true"> +1</i>
