@@ -11,35 +11,29 @@ import {init} from "./actions/index";
 import * as Api from './Api'
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            dispatch: props.dispatch
-        };
-    }
 
     componentDidMount() {
-        this.state.dispatch(init());
-        Api.updatePostsState(this.state.dispatch);
-        Api.updateCommentsState(this.state.dispatch)
+        this.props.dispatch(init());
+        Api.updatePostsState(this.props.dispatch);
+        Api.updateCommentsState(this.props.dispatch)
     }
 
     onNewPostSubmit(history,{title,body,author,category}) {
-        Api.newPost(this.state.dispatch,title,body,author,category);
+        Api.newPost(this.props.dispatch,title,body,author,category);
         history.push('/')
     }
     onEditPostSubmit(history,postId,{title,body}) {
-        Api.updatePost(this.state.dispatch,postId,title,body);
+        Api.updatePost(this.props.dispatch,postId,title,body);
         history.push(`/posts/${postId}`)
 
     }
     onNewCommentsSubmit(history,parentId,{body,author}) {
-        Api.newComment(this.state.dispatch,body,author,parentId);
+        Api.newComment(this.props.dispatch,body,author,parentId);
         history.push(`/posts/${parentId}`);
     }
 
     onEditCommentsSubmit(history,parentId,id,{body}) {
-        Api.updateComment(this.state.dispatch,id,body);
+        Api.updateComment(this.props.dispatch,id,body);
         history.push(`/posts/${parentId}`);
     }
 
