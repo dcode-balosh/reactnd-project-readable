@@ -2,7 +2,7 @@ import React, {Component} from "react";
 // ######################################## router start
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import "./App.css";
-import ColMd12 from "./components/ColMd12";
+import ColMd12 from "./components/viewHelpers/ColMd12";
 import CategoriesContainer from "./containers/CategoriesContainer";
 import PostsContainer from "./containers/PostsContainer";
 import PostContainer from "./containers/PostContainer";

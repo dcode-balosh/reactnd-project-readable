@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import ListGroupPost from "./ListGroupPost";
-import ListGroupControls from "./ListGroupControls";
+import ListGroupPost from "./posts/ListGroupPost";
+import ListGroupControls from "./posts/ListGroupControls";
 
 class Posts extends Component {
     constructor(props) {
