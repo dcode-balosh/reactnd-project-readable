@@ -4,7 +4,7 @@ import * as Actions from "./actions/index";
 const api = "http://localhost:3001";
 
 
-// Generate a unique token for storing your bookshelf data on the backend server.
+// Generate a unique token for storing your data on the backend server.
 let token = localStorage.token;
 if (!token)
     token = localStorage.token = Math.random().toString(36).substr(-8);
@@ -82,7 +82,7 @@ export const updatePost = (postId,title,body) =>
     }).then(res => res.json());
 
 export const deletePost = (dispatch,postId) => {
-    fetch(`${api}/books/${postId}`, {
+    fetch(`${api}/posts/${postId}`, {
         method: 'DELETE',
         headers: {
             ...headers,
@@ -137,7 +137,7 @@ export const updateComment = (commentId,body) =>
     }).then(res => res.json());
 
 export const deleteComment = (commentId) =>
-    fetch(`${api}/books/${commentId.id}`, {
+    fetch(`${api}/comments/${commentId.id}`, {
         method: 'DELETE',
         headers: {
             ...headers,
