@@ -11,19 +11,49 @@ class Posts extends Component {
         };
     }
 
-    onDeleteClick(id) {
-        Api.deletePost(this.state.dispatch,id);
+    onDeleteClick(modal,id) {
+        switch(modal){
+            case "post":
+                Api.deletePost(this.state.dispatch,id);
+                break;
+            case "comment":
+                alert('onDeleteClick comment')
+                // Api.deleteComment(this.state.dispatch,id);
+                break;
+            default:
+                console.log(`Error no such modal ${modal}`)
+        }
     }
 
-    onUpvoteClick(id) {
-        Api.votePost(this.state.dispatch,id,'upVote');
+    onUpvoteClick(modal,id) {
+        switch(modal){
+            case "post":
+                Api.votePost(this.state.dispatch,id,'upVote');
+                break;
+            case "comment":
+                alert('onUpvoteClick comment')
+                // Api.voteComment(this.state.dispatch,id);
+                break;
+            default:
+                console.log(`Error no such modal ${modal}`)
+        }
+
     }
 
-    onDownvoteClick(id) {
-        Api.votePost(this.state.dispatch,id,'downVote');
+    onDownvoteClick(modal,id) {
+        switch(modal){
+            case "post":
+                Api.votePost(this.state.dispatch,id,'downVote');
+                break;
+            case "comment":
+                alert('onDownvoteClick comment')
+                // console.log(`downVote not implemented for ${modal}`)
+                break;
+            default:
+                console.log(`Error no such modal ${modal}`)
+        }
+
     }
-
-
 
     sortBy = (foo) => {
         this.setState({sort: foo})
@@ -43,17 +73,17 @@ class Posts extends Component {
                           commentsLength={comments.length}
                           commentsAnchor={commentsAnchor}
                           location={location}
-                          onDeleteClick={this.onDeleteClick.bind(this)}
-                          onUpvoteClick={this.onUpvoteClick.bind(this)}
-                          onDownvoteClick={this.onDownvoteClick.bind(this)}
+                          onDeleteClick={this.onDeleteClick.bind(this,'post')}
+                          onUpvoteClick={this.onUpvoteClick.bind(this,'post')}
+                          onDownvoteClick={this.onDownvoteClick.bind(this,'post')}
                 />
                 <CommentsSectionComponent
                     comments={comments}
                     commentsAnchor={commentsAnchor}
                     location={location}
-                    onDeleteClick={this.onDeleteClick}
-                    onUpvoteClick={this.onUpvoteClick}
-                    onDownvoteClick={this.onDownvoteClick}
+                    onDeleteClick={this.onDeleteClick.bind(this,'comment')}
+                    onUpvoteClick={this.onUpvoteClick.bind(this,'comment')}
+                    onDownvoteClick={this.onDownvoteClick.bind(this,'comment')}
                 />
             </div>
         )
