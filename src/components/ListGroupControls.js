@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 class ListGroupControls extends Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class ListGroupControls extends Component {
 
     componentWillReceiveProps(nextProps) {
         const params = new URLSearchParams(nextProps.location.search);
-        const postSortBy = params.get('postSortBy'); // bar
+        const postSortBy = params.get('postSortBy') || 'voteScore'; // default voteScore
 
         if (this.state.postSortBy !== postSortBy) {
             this.setState({
@@ -59,19 +59,24 @@ class ListGroupControls extends Component {
     }
 
     render() {
+        console.log(this.state.postSortBy);
         return (
             <div className="text-right">
                 <div className="btn-group">
-                    <Link
+                    <NavLink
                         className="btn btn-outline-primary"
-                        to="?postSortBy=voteScore">
+                        to={{search: "?postSortBy=voteScore"}}
+                        isActive={() => this.state.postSortBy === 'voteScore'}
+                    >
                         Score
-                        <i className="fa fa-sort-numeric-desc" aria-hidden="true"/></Link>
-                    <Link
+                        <i className="fa fa-sort-numeric-desc" aria-hidden="true"/></NavLink>
+                    <NavLink
                         className="btn btn-outline-primary"
-                        to="?postSortBy=timeStamp">
+                        to={{search: "?postSortBy=timeStamp"}}
+                        isActive={() => this.state.postSortBy === 'timeStamp'}
+                    >
                         Time
-                        <i className="fa fa-sort-numeric-desc" aria-hidden="true"/></Link>
+                        <i className="fa fa-sort-numeric-desc" aria-hidden="true"/></NavLink>
                     <a href="/posts/new" className="btn btn-outline-primary">New <i className="fa fa-plus"
                                                                                     aria-hidden="true"/></a>
                 </div>
