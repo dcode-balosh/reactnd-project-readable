@@ -13,6 +13,8 @@ class FormPost extends Component {
             case 'comments':
                 schema = commentSchema;
                 break;
+            default:
+                console.log(`error unknown modal: ${props.modal}`)
         }
 
         this.state = {
