@@ -1,54 +1,14 @@
 import React, {Component} from "react";
 import BodyPost from "./post/BodyPost";
 import CommentsSectionComponent from "./post/CommentsSection";
-import * as Api from '../Api';
+import * as PostClickHelper from "./post/PostClickHelper"
+
 class Posts extends Component {
     constructor(props) {
         super(props);
         this.state = {
             sort: (arr) => arr
         };
-    }
-
-    onDeleteClick(modal,id) {
-        switch(modal){
-            case "post":
-                Api.deletePost(this.props.dispatch,id);
-                break;
-            case "comment":
-                Api.deleteComment(this.props.dispatch,id);
-                break;
-            default:
-                console.log(`Error no such modal ${modal}`)
-        }
-    }
-
-    onUpvoteClick(modal,id) {
-        switch(modal){
-            case "post":
-                Api.votePost(this.props.dispatch,id,'upVote');
-                break;
-            case "comment":
-                Api.voteComment(this.props.dispatch,id,'upVote');
-                break;
-            default:
-                console.log(`Error no such modal ${modal}`)
-        }
-
-    }
-
-    onDownvoteClick(modal,id) {
-        switch(modal){
-            case "post":
-                Api.votePost(this.props.dispatch,id,'downVote');
-                break;
-            case "comment":
-                Api.voteComment(this.props.dispatch,id,'downVote');
-                break;
-            default:
-                console.log(`Error no such modal ${modal}`)
-        }
-
     }
 
     sortBy = (foo) => {
@@ -69,17 +29,17 @@ class Posts extends Component {
                           commentsLength={comments.length}
                           commentsAnchor={commentsAnchor}
                           location={location}
-                          onDeleteClick={this.onDeleteClick.bind(this,'post')}
-                          onUpvoteClick={this.onUpvoteClick.bind(this,'post')}
-                          onDownvoteClick={this.onDownvoteClick.bind(this,'post')}
+                          onDeleteClick={PostClickHelper.onDeleteClick.bind(this,'post')}
+                          onUpvoteClick={PostClickHelper.onUpvoteClick.bind(this,'post')}
+                          onDownvoteClick={PostClickHelper.onDownvoteClick.bind(this,'post')}
                 />
                 <CommentsSectionComponent
                     comments={comments}
                     commentsAnchor={commentsAnchor}
                     location={location}
-                    onDeleteClick={this.onDeleteClick.bind(this,'comment')}
-                    onUpvoteClick={this.onUpvoteClick.bind(this,'comment')}
-                    onDownvoteClick={this.onDownvoteClick.bind(this,'comment')}
+                    onDeleteClick={PostClickHelper.onDeleteClick.bind(this,'comment')}
+                    onUpvoteClick={PostClickHelper.onUpvoteClick.bind(this,'comment')}
+                    onDownvoteClick={PostClickHelper.onDownvoteClick.bind(this,'comment')}
                 />
             </div>
         )
