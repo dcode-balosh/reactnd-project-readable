@@ -30,8 +30,7 @@ class Posts extends Component {
                 Api.votePost(this.state.dispatch,id,'upVote');
                 break;
             case "comment":
-                alert('onUpvoteClick comment')
-                // Api.voteComment(this.state.dispatch,id);
+                Api.voteComment(this.state.dispatch,id,'upVote');
                 break;
             default:
                 console.log(`Error no such modal ${modal}`)
@@ -45,8 +44,7 @@ class Posts extends Component {
                 Api.votePost(this.state.dispatch,id,'downVote');
                 break;
             case "comment":
-                alert('onDownvoteClick comment')
-                // console.log(`downVote not implemented for ${modal}`)
+                Api.voteComment(this.state.dispatch,id,'downVote');
                 break;
             default:
                 console.log(`Error no such modal ${modal}`)

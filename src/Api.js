@@ -135,18 +135,20 @@ export const getComment = (commentId) =>
     fetch(`${api}/comments/${commentId}`, { headers })
         .then(res => res.json());
 
-export const voteComment = (commentId) =>
-    fetch(`${api}/comments/${commentId.id}`, {
+export const voteComment = (dispatch,commentId,option) =>
+    fetch(`${api}/comments/${commentId}`, {
         method: 'POST',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({})
-    }).then(res => res.json());
+        body: JSON.stringify({
+            option: option
+        })
+    }).then(res => updateCommentsState(dispatch));
 
 export const updateComment = (commentId,body) =>
-    fetch(`${api}/posts/${commentId.id}`, {
+    fetch(`${api}/posts/${commentId}`, {
         method: 'PUT',
         headers: {
             ...headers,
