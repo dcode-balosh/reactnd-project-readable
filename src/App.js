@@ -1,15 +1,15 @@
 import React, {Component} from "react";
 // ######################################## router start
-import {BrowserRouter as Router, Route,Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import "./App.css";
 import ColMd12 from "./components/ColMd12";
 import CategoriesContainer from "./containers/CategoriesContainer";
 import PostsContainer from "./containers/PostsContainer";
 import PostContainer from "./containers/PostContainer";
-import FormPost from "./components/FormPost";
+import FormPostContainer from "./containers/FormPostContainer";
 
 class App extends Component {
-    onNewPostSubmit(data){
+    onNewPostSubmit(data) {
         alert(`Submitted with:\n${JSON.stringify(data)}`)
     }
 
@@ -33,19 +33,24 @@ class App extends Component {
                                                          category={match.params.category}/></ColMd12>
                             </div>
                         }/>
-                        <Route exact path="/posts/new" render={({location,match}) =>
+                        <Route exact path="/posts/new" render={({location, match}) =>
                             <div className="App">
-                                <FormPost onNewPostSubmit={this.onNewPostSubmit}/>
+                                <FormPostContainer onNewPostSubmit={this.onNewPostSubmit}/>
                             </div>
                         }/>
-                        <Route exact path="/posts/:postId" render={({location,match}) =>
+                        <Route exact path="/posts/:postId/edit" render={({location, match}) =>
+                            <div className="App">
+                                <FormPostContainer onNewPostSubmit={this.onNewPostSubmit}
+                                                   postId={match.params.postId}/>
+                            </div>
+                        }/>
+                        <Route exact path="/posts/:postId" render={({location, match}) =>
                             <div className="App">
                                 <PostContainer location={location}
-                                                       postId={match.params.postId}
+                                               postId={match.params.postId}
                                 />
                             </div>
                         }/>
-
 
 
                     </Switch>
