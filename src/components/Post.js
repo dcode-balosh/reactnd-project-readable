@@ -1,25 +1,29 @@
 import React, {Component} from "react";
 import BodyPost from "./post/BodyPost";
 import CommentsSectionComponent from "./post/CommentsSection";
-
+import * as Api from '../Api';
 class Posts extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sort: (arr) => arr
+            sort: (arr) => arr,
+            dispatch: props.dispatch
         };
     }
 
     onDeleteClick(id) {
         alert(`deleting ${id}`)
+        Api.deletePost(this.state.dispatch,id);
     }
 
     onUpvoteClick(id) {
         alert(`upvoting ${id}`)
+        Api.votePost(this.state.dispatch,id,'upVote');
     }
 
     onDownvoteClick(id) {
         alert(`downvoting ${id}`)
+        Api.votePost(this.state.dispatch,id,'downVote');
     }
 
 

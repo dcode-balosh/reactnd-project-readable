@@ -1,4 +1,6 @@
 // taken from reactnd-project-myreads-starter
+import * as Actions from "./actions/index";
+
 const api = "http://localhost:3001";
 
 
@@ -27,14 +29,14 @@ export const getPosts = () =>
         .then(res => res.json());
 
 export const newPost = (title, body, author, category) =>
-    fetch(`${api}/books/${book.id}`, {
+    fetch(`${api}/posts}`, {
         method: 'POST',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            id: guid(),
+            id: window.$.guid(),
             timestamp: Date.now(),
             title,
             body,
@@ -47,7 +49,7 @@ export const getPost = (postId) =>
     fetch(`${api}/posts/${postId}`, { headers })
         .then(res => res.json());
 
-export const votePost = (postId,option) =>
+export const votePost = (dispatch,postId,option) =>
     fetch(`${api}/posts/${postId.id}`, {
         method: 'POST',
         headers: {
@@ -57,7 +59,9 @@ export const votePost = (postId,option) =>
         body: JSON.stringify({
             option
         })
-    }).then(res => res.json());
+    }).then(res => res.json()).then( () => {
+        updatePostsState(dispatch)
+    } );
 
 export const updatePost = (postId,title,body) =>
     fetch(`${api}/posts/${postId.id}`, {
@@ -72,7 +76,7 @@ export const updatePost = (postId,title,body) =>
         })
     }).then(res => res.json());
 
-export const deletePost = (postId) =>
+export const deletePost = (dispatch,postId) => {
     fetch(`${api}/books/${postId.id}`, {
         method: 'DELETE',
         headers: {
@@ -80,7 +84,11 @@ export const deletePost = (postId) =>
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({})
-    }).then(res => res.json());
+    }).then(res => res.json()).then( () => {
+        updatePostsState(dispatch)
+    } );
+
+};
 
 export const getPostComments = (postId) =>
     fetch(`${api}/posts/${postId}/comments`, { headers })
@@ -135,3 +143,19 @@ export const deleteComment = (commentId) =>
         },
         body: JSON.stringify({})
     }).then(res => res.json());
+
+
+export const updatePostsState = (dispatch) => {
+    getPosts().then(posts =>
+    dispatch(Actions.updatePosts(posts))
+    )
+};
+export const updateCommentsState = (dispatch) => {
+    getPosts().then(posts =>
+        Object.keys(posts).map((postId) => {
+                getPostComments(postId).then(comments =>
+                    dispatch(Actions.updateComments(comments)))
+            }
+        )
+    )
+};
