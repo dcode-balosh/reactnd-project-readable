@@ -10,6 +10,7 @@ import FormContainer from "./containers/FormContainer";
 import {init} from "./actions/index";
 import * as Api from './Api'
 import AppHeader from "./components/Header";
+import NotFoundPage from "./components/viewHelpers/NotFoundPage";
 
 class App extends Component {
 
@@ -41,6 +42,8 @@ class App extends Component {
 
 
     render() {
+        let categories = this.props.categories;
+        let posts = this.props.posts;
         return (
             <Router>
                 <div>
@@ -56,11 +59,12 @@ class App extends Component {
                         <Route exact path="/categories/:category" render={({location, match}) =>
                             <div className="App">
                                 <ColMd12><AppHeader/></ColMd12>
-                                <div className="page-header text-center"><h1>{match.params.category}</h1></div>
-                                <ColMd12><CategoriesContainer location={location}/></ColMd12>
-                                <ColMd12><PostsContainer location={location}
-                                                         category={match.params.category}/></ColMd12>
-                            </div>
+                                <NotFoundPage condition={this.categoryExists(match, categories)}>
+                                    <div className="page-header text-center"><h1>{match.params.category}</h1></div>
+                                    <ColMd12><CategoriesContainer location={location}/></ColMd12>
+                                    <ColMd12><PostsContainer location={location}
+                                                             category={match.params.category}/></ColMd12>
+                                </NotFoundPage></div>
                         }/>
                         <Route exact path="/posts/new" render={({history,location, match}) =>
                             <div className="App">
@@ -72,41 +76,49 @@ class App extends Component {
                         <Route exact path="/:category/:postId/edit" render={({history,location, match}) =>
                             <div className="App">
                                 <ColMd12><AppHeader/></ColMd12>
-                                <FormContainer modal='posts'
-                                               onNewPostSubmit={this.onEditPostSubmit.bind(this, history,
-                                                   match.params.category,
-                                                   match.params.postId)}
-                                               modalId={match.params.postId}/>
+                                <NotFoundPage condition={ this.postIdExists(match, posts) && this.categoryExists(match, categories) }>
+                                    <FormContainer modal='posts'
+                                                   onNewPostSubmit={this.onEditPostSubmit.bind(this, history,
+                                                       match.params.category,
+                                                       match.params.postId)}
+                                                   modalId={match.params.postId}/>
+                                </NotFoundPage>
                             </div>
                         }/>
                         <Route exact path="/:category/:postId" render={({location, match}) =>
                             <div className="App">
                                 <ColMd12><AppHeader/></ColMd12>
-                                <PostContainer location={location}
-                                               postId={match.params.postId}
-                                />
+                                <NotFoundPage condition={this.postIdExists(match, posts) && this.categoryExists(match, categories)}>
+                                    <PostContainer location={location}
+                                                   postId={match.params.postId}
+                                    />
+                                </NotFoundPage>
                             </div>
                         }/>
                         <Route exact path="/:category/:postId/comments/:commentId/edit"
                                render={({history, location, match}) =>
                                    <div className="App">
                                        <ColMd12><AppHeader/></ColMd12>
+                                       <NotFoundPage condition={this.postIdExists(match, posts) && this.categoryExists(match, categories)}>
                                        <FormContainer modal='comments'
                                                       onNewPostSubmit={this.onEditCommentsSubmit.bind(this, history,
                                                           match.params.category,
                                                           match.params.postId,
                                                           match.params.commentId)}
                                                       modalId={match.params.commentId}/>
+                                       </NotFoundPage>
                                    </div>
                                }/>
                         <Route exact path="/:category/:postId/comments/new" render={({history, location, match}) =>
                             <div className="App">
                                 <ColMd12><AppHeader/></ColMd12>
-                                <FormContainer modal='comments'
-                                               onNewPostSubmit={this.onNewCommentsSubmit.bind(this, history,
-                                                   match.params.category,
-                                                   match.params.postId)}
-                                />
+                                <NotFoundPage condition={this.postIdExists(match, posts) && this.categoryExists(match, categories)}>
+                                    <FormContainer modal='comments'
+                                                   onNewPostSubmit={this.onNewCommentsSubmit.bind(this, history,
+                                                       match.params.category,
+                                                       match.params.postId)}
+                                    />
+                                </NotFoundPage>
                             </div>
                         }/>
 
@@ -115,6 +127,14 @@ class App extends Component {
                 </div>
             </Router>
         );
+    }
+
+    categoryExists(match, categories) {
+        return categories.map((x) => x.path).includes(match.params.category);
+    }
+
+    postIdExists(match, posts) {
+        return posts[match.params.postId];
     }
 }
 
