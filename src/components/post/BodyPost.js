@@ -20,11 +20,6 @@ class BodyPost extends Component {
 
     render() {
         let {post, commentsLength} = this.props;
-        console.log(2222222222222)
-        console.log(post)
-        console.log(2222222222222)
-
-
         return (
             <div className="bodyPostClass">
                 <div className="py-5">
