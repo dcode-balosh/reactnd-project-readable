@@ -1,22 +1,29 @@
 import React, {Component} from "react";
 import ListGroupPost from "./ListGroupPost";
 import ListGroupControls from "./ListGroupControls";
+
 class Posts extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            sort: (arr) => arr
+        };
+    }
+
+    sortBy = (foo) => {
+        this.setState({sort: foo})
+    };
+
     render() {
         let posts = this.props.posts;
         return (
             <div className="posts-component">
                 <h1 className="posts-header">Posts</h1>
-                <ListGroupControls/>
+                <ListGroupControls sortBy={this.sortBy}/>
                 <ListGroupPost items={posts}
                                keys={["id", "parent"]}
                                prefix="posts"
-                               sort={ (arr) => arr.sort((a, b) =>
-                                   (a.voteScore === b.voteScore
-                                       ? 0
-                                       : (a.voteScore > b.voteScore ? -1 : 1) )
-                               )
-                               }
+                               sort={this.state.sort}
                 />
             </div>
         )

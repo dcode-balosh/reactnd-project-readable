@@ -1,6 +1,34 @@
 import React, {Component} from "react";
 
 class ListGroupControls extends Component {
+    sortByVoteScore = (arr) => {
+        return arr.length === 0
+            ? arr
+            : arr.sort(
+                (a, b) =>
+                    (a.voteScore === b.voteScore
+                        ? 0
+                        : (a.voteScore > b.voteScore ? -1 : 1) )
+            )
+    };
+
+    sortByTimeStamp = (arr) => {
+        return arr.length === 0
+            ? arr
+            : arr.sort(
+                (a, b) =>
+                    (a.timestamp === b.timestamp
+                        ? 0
+                        : (a.timestamp > b.timestamp ? -1 : 1) )
+            )
+
+    };
+
+    componentDidMount(){
+        this.props.sortBy(this.sortByVoteScore);
+    }
+
+
     render() {
         return (
             <div className="text-right">

@@ -23,8 +23,8 @@ require('bootstrap/dist/js/bootstrap.min.js');
 const store = createStore(
     rootReducer,
     {
-        categories: ['category_one'],
-        posts: ['post_one']
+        categories: [],
+        posts: []
     },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
