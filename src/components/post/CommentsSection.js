@@ -12,8 +12,7 @@ class CommentsSectionComponent extends Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-12">
-                                    <a name={commentsAnchor}/>
-                                    <h2 className="page-header text-center text-capitalize">No Comments</h2>
+                                    <h2 className="page-header text-center text-capitalize"><a name={commentsAnchor}>No Comments</a></h2>
                                 </div>
                             </div>
                         </div>
@@ -29,8 +28,7 @@ class CommentsSectionComponent extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12">
-                                <a name={commentsAnchor}/>
-                                <h2 className="page-header text-center text-capitalize">Comments</h2>
+                                <h2 className="page-header text-center text-capitalize"><a name={commentsAnchor}>Comments</a></h2>
                             </div>
                         </div>
                     </div>
