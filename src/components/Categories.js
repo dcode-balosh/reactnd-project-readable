@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import ListGroupCategory from './ListGroupCategory'
+import ListGroupCategory from './Categories/ListGroupCategory'
 class Categories extends Component {
     render() {
         let categories = this.props.categories;
