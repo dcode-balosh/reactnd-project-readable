@@ -65,6 +65,19 @@ class App extends Component {
                                 />
                             </div>
                         }/>
+                        <Route exact path="/posts/:postId/comments/:commentId/edit" render={({location, match}) =>
+                            <div className="App">
+                                <FormContainer modal='comments'
+                                               onNewPostSubmit={this.onNewPostSubmit}
+                                               modalId={match.params.commentId}/>
+                            </div>
+                        }/>
+                        <Route exact path="/posts/:postId/comments/new" render={({location, match}) =>
+                            <div className="App">
+                                <FormContainer modal='comments'
+                                               onNewPostSubmit={this.onNewPostSubmit}/>
+                            </div>
+                        }/>
 
 
                     </Switch>

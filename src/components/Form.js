@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import postSchema from "../schemas/post.js"
+import commentSchema from "../schemas/comment.js"
 
 class FormPost extends Component {
     constructor(props) {
@@ -8,6 +9,9 @@ class FormPost extends Component {
         switch (props.modal) {
             case 'posts':
                 schema = postSchema;
+                break;
+            case 'comments':
+                schema = commentSchema;
                 break;
         }
 
