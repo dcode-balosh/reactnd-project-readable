@@ -25,6 +25,7 @@ class Posts extends Component {
                                keys={["id", "parent"]}
                                prefix="posts"
                                sort={this.state.sort}
+                               category={this.props.category}
                 />
             </div>
         )

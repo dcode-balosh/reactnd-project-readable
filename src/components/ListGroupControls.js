@@ -53,7 +53,6 @@ class ListGroupControls extends Component {
                     this.props.sortBy(this.sortByTimeStamp);
                     break;
                 default:
-                    console.log(`Error no such state.postSortBy ${this.state.postSortBy}`);
                     this.props.sortBy(this.sortByVoteScore);
             }
         }

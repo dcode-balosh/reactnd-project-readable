@@ -20,5 +20,16 @@ export const posts = {
     voteScore: -5,
     deleted: false,
     commentCount: 0
-  }
+  },
+    "9xf0y6ziyjabvozdd253nd": {
+        id: '9xf0y6ziyjabvozdd253nd',
+        timestamp: 1467166872635,
+        title: 'Second Udacity is the best place to learn React',
+        body: 'Second Everyone says so after all.',
+        author: 'thingtwo',
+        category: 'react',
+        voteScore: 4,
+        deleted: false,
+        commentCount: 2
+    },
 };

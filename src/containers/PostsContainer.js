@@ -4,7 +4,8 @@ import Posts from "../components/Posts";
 function mapStateToProps(state,ownProps) {
     return {
         posts: state.posts,
-        location: ownProps.location
+        location: ownProps.location,
+        category: ownProps.category
     }
 }
 

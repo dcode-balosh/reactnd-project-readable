@@ -6,7 +6,12 @@ class Categories extends Component {
         return (
             <div className="categories-component">
                 <h1 className="categories-header">Categories</h1>
-                <ListGroupCategory items={categories} home={true} keys={["name"]} prefix="categories"/>
+                <ListGroupCategory items={categories}
+                                   home={true}
+                                   keys={["name"]}
+                                   prefix="categories"
+                                   location={this.props.location}
+                />
             </div>
         )
     }

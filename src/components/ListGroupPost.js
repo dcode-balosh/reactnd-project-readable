@@ -1,10 +1,28 @@
 import React, {Component} from "react";
 class ListGroupPost extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            posts: []
+        };
+    }
+    componentWillReceiveProps(nextProps){
+        let posts = Object.values(nextProps.items);
+        // filter active category if needed
+        if(nextProps.category){
+            posts = posts.filter(post => post.category === nextProps.category);
+        }
+        // sort
+        posts = nextProps.sort(posts);
+        if(this.state.posts !== posts){
+            this.setState({posts});
+        }
+    }
+
     render() {
-        let sorted_posts = this.props.sort(Object.values(this.props.items));
         return (
             <ul className="list-group">
-                {sorted_posts.map((c, i) =>
+                {this.state.posts.map((c, i) =>
                     <a href={`/${this.props.prefix}/${c.id}`}
                        className="list-group-item list-group-item-action"
                     key={c.id}>
@@ -16,3 +34,4 @@ class ListGroupPost extends Component {
     }
 }
 export default ListGroupPost;
+
