@@ -12,7 +12,6 @@ class Posts extends Component {
     }
 
     onDeleteClick(id) {
-        alert(`deleting ${id}`)
         Api.deletePost(this.state.dispatch,id);
     }
 
