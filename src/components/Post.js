@@ -16,6 +16,7 @@ class Posts extends Component {
 
     render() {
         let {post, comments} = this.props;
+        const commentsAnchor = 'commentsHeaderId';
         {
             console.log(this.props)
         }
@@ -26,8 +27,8 @@ class Posts extends Component {
 
         return (
             <div className="post-component">
-                <BodyPost post={post} commentsLength={comments.length}/>
-                <CommentsSectionComponent comments={comments}/>
+                <BodyPost post={post} commentsLength={comments.length} commentsAnchor={commentsAnchor}/>
+                <CommentsSectionComponent comments={comments} commentsAnchor={commentsAnchor}/>
             </div>
         )
     }

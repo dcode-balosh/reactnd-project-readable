@@ -19,7 +19,7 @@ class BodyPost extends Component {
 
 
     render() {
-        let {post, commentsLength} = this.props;
+        let {post, commentsLength, commentsAnchor} = this.props;
         return (
             <div className="bodyPostClass">
                 <div className="py-5">
@@ -36,8 +36,9 @@ class BodyPost extends Component {
                             <div className="col-md-3">{this.timeStamp(post.timestamp)}</div>
                             <div className="col-md-3"><i className="fa fa-thumbs-up"
                                                          aria-hidden="true">  {post.voteScore}  </i></div>
-                            <div className="col-md-3"><i className="fa fa-comments"
-                                                         aria-hidden="true">  {commentsLength}  </i></div>
+                            <div className="col-md-3"><a href={`#${commentsAnchor}`}> <i className="fa fa-comments"
+                                                                                         aria-hidden="true">  {commentsLength}  </i></a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,7 @@ import ListComments from "./ListComments";
 
 class CommentsSectionComponent extends Component {
     render() {
-        let {comments} = this.props;
+        let {comments, commentsAnchor} = this.props;
 
         if(0 === comments.length){
             return(
@@ -12,6 +12,7 @@ class CommentsSectionComponent extends Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-md-12">
+                                    <a name={commentsAnchor}/>
                                     <h2 className="page-header text-center text-capitalize">No Comments</h2>
                                 </div>
                             </div>
@@ -28,6 +29,7 @@ class CommentsSectionComponent extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12">
+                                <a name={commentsAnchor}/>
                                 <h2 className="page-header text-center text-capitalize">Comments</h2>
                             </div>
                         </div>
