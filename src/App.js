@@ -7,8 +7,20 @@ import CategoriesContainer from "./containers/CategoriesContainer";
 import PostsContainer from "./containers/PostsContainer";
 import PostContainer from "./containers/PostContainer";
 import FormContainer from "./containers/FormContainer";
+import {init} from "./actions/index";
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dispatch: props.dispatch
+        };
+    }
+
+    componentDidMount() {
+        this.state.dispatch(init());
+    }
+
     onNewPostSubmit(data) {
         alert(`Submitted with:\n${JSON.stringify(data)}`)
     }

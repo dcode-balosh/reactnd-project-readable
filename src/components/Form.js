@@ -19,6 +19,9 @@ class FormPost extends Component {
     }
 
     form_render(onNewPostSubmit,data,schema) {
+        if(window.$("#form")){
+            window.$("#form").empty();
+        }
         window.$("#form").alpaca({
             "schema": schema(),
             "data": data,
@@ -56,6 +59,10 @@ class FormPost extends Component {
         if(nextProps.modal !== this.state.modal){
             this.setState({modal: nextProps.modal})
         }
+    }
+
+    componentDidUpdate(){
+        this.form_render(this.state.onNewPostSubmit,this.state.data,this.state.schema);
     }
 
     render() {
