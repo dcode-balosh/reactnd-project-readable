@@ -50,7 +50,7 @@ export const getPost = (postId) =>
         .then(res => res.json());
 
 export const votePost = (dispatch,postId,option) =>
-    fetch(`${api}/posts/${postId.id}`, {
+    fetch(`${api}/posts/${postId}`, {
         method: 'POST',
         headers: {
             ...headers,
@@ -64,7 +64,7 @@ export const votePost = (dispatch,postId,option) =>
     } );
 
 export const updatePost = (postId,title,body) =>
-    fetch(`${api}/posts/${postId.id}`, {
+    fetch(`${api}/posts/${postId}`, {
         method: 'PUT',
         headers: {
             ...headers,
@@ -77,7 +77,7 @@ export const updatePost = (postId,title,body) =>
     }).then(res => res.json());
 
 export const deletePost = (dispatch,postId) => {
-    fetch(`${api}/books/${postId.id}`, {
+    fetch(`${api}/books/${postId}`, {
         method: 'DELETE',
         headers: {
             ...headers,
@@ -153,7 +153,7 @@ export const updatePostsState = (dispatch) => {
 export const updateCommentsState = (dispatch) => {
     getPosts().then(posts =>
         Object.keys(posts).map((postId) => {
-                getPostComments(postId).then(comments =>
+                return getPostComments(postId).then(comments =>
                     dispatch(Actions.updateComments(comments)))
             }
         )
