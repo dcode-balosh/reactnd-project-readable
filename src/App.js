@@ -18,6 +18,13 @@ class App extends Component {
                             <ColMd12><PostsContainer location={location} /></ColMd12>
                         </div>
                     }/>
+                    <Route exact path="/categories/:category" render={({location,match}) =>
+                        <div className="App">
+                            <div class="page-header text-center"><h1>{match.params.category}</h1></div>
+                            <ColMd12><CategoriesContainer location={location} /></ColMd12>
+                            <ColMd12><PostsContainer location={location} /></ColMd12>
+                        </div>
+                    }/>
                     <Route path="/posts" render={() =>
                         <span>#TBD new post view</span>
                     }/>

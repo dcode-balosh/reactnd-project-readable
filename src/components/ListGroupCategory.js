@@ -1,19 +1,21 @@
 import React, {Component} from "react";
+import { NavLink } from 'react-router-dom'
+
 class ListGroupCategory extends Component {
     render() {
         return (
             <ul className="list-group">
-                <a href={`${this.props.prefix}/#`}
+                <NavLink exact to={`/`}
                    className="list-group-item list-group-item-action">
                     <i className="fa fa-home fa-fw"/>
                     All
-                </a>
+                </NavLink>
                 {this.props.items.map((c, i) =>
-                    <a href={`/${this.props.prefix}/${c.name}`}
+                    <NavLink exact to={`/${this.props.prefix}/${c.name}/`}
                        className="list-group-item list-group-item-action"
                        key={i}>
                         {`${c.name}`}
-                    </a>
+                    </NavLink>
                 )}
             </ul>
         )
