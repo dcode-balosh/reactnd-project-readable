@@ -13,6 +13,7 @@ class App extends Component {
                 <div>
                     <Route exact path="/" render={({location}) =>
                         <div className="App">
+                            <div class="page-header text-center"><h1>Readable</h1></div>
                             <ColMd12><CategoriesContainer/></ColMd12>
                             <ColMd12><PostsContainer location={location} /></ColMd12>
                         </div>
