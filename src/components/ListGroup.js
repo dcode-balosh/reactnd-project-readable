@@ -11,7 +11,7 @@ class ListGroup extends Component {
                     </a>
                 )}
                 {this.props.items.map((c, i) =>
-                    <a href={`${this.props.prefix}/${c}`}
+                    <a href={`/${this.props.prefix}/${c}`}
                        className="list-group-item list-group-item-action"
                     key={i}>
                         {`${c}`}
