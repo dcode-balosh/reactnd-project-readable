@@ -33,11 +33,14 @@ class App extends Component {
         history.push(`/posts/${postId}`)
 
     }
-    onNewCommentsSubmit(data) {
-        alert(`Submitted with:\n${JSON.stringify(data)}`)
+    onNewCommentsSubmit(history,parentId,{body,author}) {
+        Api.newComment(this.state.dispatch,body,author,parentId);
+        history.push(`/posts/${parentId}`);
     }
-    onEditCommentsSubmit(data) {
-        alert(`Submitted with:\n${JSON.stringify(data)}`)
+
+    onEditCommentsSubmit(history,parentId,id,{body}) {
+        Api.updateComment(this.state.dispatch,id,body);
+        history.push(`/posts/${parentId}`);
     }
 
 
@@ -82,17 +85,18 @@ class App extends Component {
                                 />
                             </div>
                         }/>
-                        <Route exact path="/posts/:postId/comments/:commentId/edit" render={({location, match}) =>
+                        <Route exact path="/posts/:postId/comments/:commentId/edit" render={({history,location, match}) =>
                             <div className="App">
                                 <FormContainer modal='comments'
-                                               onNewPostSubmit={this.onNewCommentsSubmit}
+                                               onNewPostSubmit={this.onEditCommentsSubmit.bind(this,history,match.params.postId,match.params.commentId)}
                                                modalId={match.params.commentId}/>
                             </div>
                         }/>
-                        <Route exact path="/posts/:postId/comments/new" render={({location, match}) =>
+                        <Route exact path="/posts/:postId/comments/new" render={({history,location, match}) =>
                             <div className="App">
                                 <FormContainer modal='comments'
-                                               onNewPostSubmit={this.onEditCommentsSubmit}/>
+                                               onNewPostSubmit={this.onNewCommentsSubmit.bind(this,history,match.params.postId)}
+                                />
                             </div>
                         }/>
 

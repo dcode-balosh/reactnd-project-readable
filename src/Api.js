@@ -116,8 +116,8 @@ export const getPostComments = (postId) =>
                 }, {})
             }));
 
-export const newComment = (body,author,parentId) =>
-    fetch(`${api}/comments}`, {
+export const newComment = (dispatch,body,author,parentId) =>
+    fetch(`${api}/comments`, {
         method: 'POST',
         headers: {
             ...headers,
@@ -128,8 +128,9 @@ export const newComment = (body,author,parentId) =>
             timestamp: Date.now(),
             body,
             author,
-            parentId})
-    }).then(res => res.json());
+            parentId
+        })
+    }).then(res => updateCommentsState(dispatch));
 
 export const getComment = (commentId) =>
     fetch(`${api}/comments/${commentId}`, { headers })
@@ -147,8 +148,8 @@ export const voteComment = (dispatch,commentId,option) =>
         })
     }).then(res => updateCommentsState(dispatch));
 
-export const updateComment = (commentId,body) =>
-    fetch(`${api}/posts/${commentId}`, {
+export const updateComment = (dispatch, commentId, body) =>
+    fetch(`${api}/comments/${commentId}`, {
         method: 'PUT',
         headers: {
             ...headers,
@@ -158,7 +159,7 @@ export const updateComment = (commentId,body) =>
             timestamp: Date.now(),
             body
         })
-    }).then(res => res.json());
+    }).then(res => updateCommentsState(dispatch));
 
 export const deleteComment = (dispatch,commentId) =>
     fetch(`${api}/comments/${commentId}`, {
@@ -183,7 +184,6 @@ export const updateCommentsState = (dispatch) => {
         let results = Promise.all(actions);
         results.then(
             (result) => {
-                console.log(result);
                 let comments = result.reduce((acu,cur) => ({...acu,...cur}) , {} ) ;
                 dispatch(Actions.updateComments(comments));
             });
