@@ -1,6 +1,14 @@
 import React, {Component} from "react";
+import {Link} from "react-router-dom";
 
 class ListGroupControls extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            postSortBy: 'voteScore'
+        };
+    }
+
     sortByVoteScore = (arr) => {
             return arr.length === 0
             ? arr
@@ -24,38 +32,49 @@ class ListGroupControls extends Component {
 
     };
 
-    handleSortByVoteScore = (e) => {
-        e.preventDefault();
-        this.props.sortBy(this.sortByVoteScore);
-    };
+    componentWillReceiveProps(nextProps) {
+        const params = new URLSearchParams(nextProps.location.search);
+        const postSortBy = params.get('postSortBy'); // bar
 
-    handleSortByTimeStampClick = (e) => {
-        e.preventDefault();
-        this.props.sortBy(this.sortByTimeStamp);
-    };
-
-
-    componentDidMount(){
-        this.props.sortBy(this.sortByVoteScore);
+        if (this.state.postSortBy !== postSortBy) {
+            this.setState({
+                postSortBy
+            })
+        }
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.postSortBy !== this.state.postSortBy) {
+            switch (this.state.postSortBy) {
+                case 'voteScore':
+                    this.props.sortBy(this.sortByVoteScore);
+                    break;
+                case 'timeStamp':
+                    this.props.sortBy(this.sortByTimeStamp);
+                    break;
+                default:
+                    console.log(`Error no such state.postSortBy ${this.state.postSortBy}`);
+                    this.props.sortBy(this.sortByVoteScore);
+            }
+        }
+    }
 
     render() {
         return (
             <div className="text-right">
                 <div className="btn-group">
-                    <a href="?postSortBy=voteScore"
-                       className="btn btn-outline-primary"
-                       onClick={this.handleSortByVoteScore}>
+                    <Link
+                        className="btn btn-outline-primary"
+                        to="?postSortBy=voteScore">
                         Score
-                        <i className="fa fa-sort-numeric-desc" aria-hidden="true"/></a>
-                    <a href="?postSortBy=timeStamp"
-                       className="btn btn-outline-primary"
-                       onClick={this.handleSortByTimeStampClick}>
+                        <i className="fa fa-sort-numeric-desc" aria-hidden="true"/></Link>
+                    <Link
+                        className="btn btn-outline-primary"
+                        to="?postSortBy=timeStamp">
                         Time
-                        <i className="fa fa-sort-numeric-desc" aria-hidden="true"/></a>
+                        <i className="fa fa-sort-numeric-desc" aria-hidden="true"/></Link>
                     <a href="/posts/new" className="btn btn-outline-primary">New <i className="fa fa-plus"
-                                                                           aria-hidden="true"/></a>
+                                                                                    aria-hidden="true"/></a>
                 </div>
             </div>
         )

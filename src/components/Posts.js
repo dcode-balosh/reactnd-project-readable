@@ -19,7 +19,8 @@ class Posts extends Component {
         return (
             <div className="posts-component">
                 <h1 className="posts-header">Posts</h1>
-                <ListGroupControls sortBy={this.sortBy}/>
+                <ListGroupControls sortBy={this.sortBy}
+                location={this.props.location}/>
                 <ListGroupPost items={posts}
                                keys={["id", "parent"]}
                                prefix="posts"
