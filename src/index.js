@@ -12,6 +12,8 @@ import {Provider} from "react-redux";
 import rootReducer from "./reducers/index";
 // ################################## end
 
+import {init} from './actions/index'
+
 // ################################## Bootstrap js
 window.jQuery = window.$ = require('jquery/dist/jquery.min.js');
 require('bootstrap/dist/js/bootstrap.min.js');
@@ -35,4 +37,6 @@ ReactDOM.render(
 
 
 registerServiceWorker();
+
+store.dispatch(init());
 
