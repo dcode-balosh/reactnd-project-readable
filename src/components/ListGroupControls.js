@@ -54,7 +54,7 @@ class ListGroupControls extends Component {
                        onClick={this.handleSortByTimeStampClick}>
                         Time
                         <i className="fa fa-sort-numeric-desc" aria-hidden="true"/></a>
-                    <a href="#" className="btn btn-outline-primary">New <i className="fa fa-plus"
+                    <a href="/posts/new" className="btn btn-outline-primary">New <i className="fa fa-plus"
                                                                            aria-hidden="true"/></a>
                 </div>
             </div>
