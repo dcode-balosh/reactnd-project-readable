@@ -6,6 +6,7 @@ import ColMd12 from "./components/ColMd12";
 import CategoriesContainer from "./containers/CategoriesContainer";
 import PostsContainer from "./containers/PostsContainer";
 import PostContainer from "./containers/PostContainer";
+import NewPost from "./components/NewPost";
 
 class App extends Component {
     render() {
@@ -28,6 +29,11 @@ class App extends Component {
                                                          category={match.params.category}/></ColMd12>
                             </div>
                         }/>
+                        <Route exact path="/posts/new" render={({location,match}) =>
+                            <div className="App">
+                                <NewPost/>
+                            </div>
+                        }/>
                         <Route exact path="/posts/:postId" render={({location,match}) =>
                             <div className="App">
                                 <PostContainer location={location}
@@ -35,6 +41,7 @@ class App extends Component {
                                 />
                             </div>
                         }/>
+
 
 
                     </Switch>
