@@ -31,7 +31,7 @@ class ListGroupPost extends Component {
         return (
             <ul className="list-group">
                 {this.state.posts.map((c, i) =>
-                    <a href={`/${this.props.prefix}/${c.id}`}
+                    <a href={`${c.category}/${c.id}`}
                        className="list-group-item list-group-item-action"
                     key={c.id}>
                         {`${c.title}`}

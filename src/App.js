@@ -22,19 +22,19 @@ class App extends Component {
         Api.newPost(this.props.dispatch,title,body,author,category);
         history.push('/')
     }
-    onEditPostSubmit(history,postId,{title,body}) {
+    onEditPostSubmit(history,category,postId,{title,body}) {
         Api.updatePost(this.props.dispatch,postId,title,body);
-        history.push(`/posts/${postId}`)
+        history.push(`/${category}/${postId}`)
 
     }
-    onNewCommentsSubmit(history,parentId,{body,author}) {
+    onNewCommentsSubmit(history,category,parentId,{body,author}) {
         Api.newComment(this.props.dispatch,body,author,parentId);
-        history.push(`/posts/${parentId}`);
+        history.push(`/${category}/${parentId}`);
     }
 
-    onEditCommentsSubmit(history,parentId,id,{body}) {
+    onEditCommentsSubmit(history,category,parentId,id,{body}) {
         Api.updateComment(this.props.dispatch,id,body);
-        history.push(`/posts/${parentId}`);
+        history.push(`/${category}/${parentId}`);
     }
 
 
@@ -65,31 +65,39 @@ class App extends Component {
                                                onNewPostSubmit={this.onNewPostSubmit.bind(this,history)}/>
                             </div>
                         }/>
-                        <Route exact path="/posts/:postId/edit" render={({history,location, match}) =>
+                        <Route exact path="/:category/:postId/edit" render={({history,location, match}) =>
                             <div className="App">
                                 <FormContainer modal='posts'
-                                    onNewPostSubmit={this.onEditPostSubmit.bind(this,history,match.params.postId)}
-                                                   modalId={match.params.postId}/>
+                                               onNewPostSubmit={this.onEditPostSubmit.bind(this, history,
+                                                   match.params.category,
+                                                   match.params.postId)}
+                                               modalId={match.params.postId}/>
                             </div>
                         }/>
-                        <Route exact path="/posts/:postId" render={({location, match}) =>
+                        <Route exact path="/:category/:postId" render={({location, match}) =>
                             <div className="App">
                                 <PostContainer location={location}
                                                postId={match.params.postId}
                                 />
                             </div>
                         }/>
-                        <Route exact path="/posts/:postId/comments/:commentId/edit" render={({history,location, match}) =>
+                        <Route exact path="/:category/:postId/comments/:commentId/edit"
+                               render={({history, location, match}) =>
+                                   <div className="App">
+                                       <FormContainer modal='comments'
+                                                      onNewPostSubmit={this.onEditCommentsSubmit.bind(this, history,
+                                                          match.params.category,
+                                                          match.params.postId,
+                                                          match.params.commentId)}
+                                                      modalId={match.params.commentId}/>
+                                   </div>
+                               }/>
+                        <Route exact path="/:category/:postId/comments/new" render={({history, location, match}) =>
                             <div className="App">
                                 <FormContainer modal='comments'
-                                               onNewPostSubmit={this.onEditCommentsSubmit.bind(this,history,match.params.postId,match.params.commentId)}
-                                               modalId={match.params.commentId}/>
-                            </div>
-                        }/>
-                        <Route exact path="/posts/:postId/comments/new" render={({history,location, match}) =>
-                            <div className="App">
-                                <FormContainer modal='comments'
-                                               onNewPostSubmit={this.onNewCommentsSubmit.bind(this,history,match.params.postId)}
+                                               onNewPostSubmit={this.onNewCommentsSubmit.bind(this, history,
+                                                   match.params.category,
+                                                   match.params.postId)}
                                 />
                             </div>
                         }/>
