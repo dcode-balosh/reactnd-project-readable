@@ -5,6 +5,7 @@ class CommentsSectionComponent extends Component {
     render() {
         let {comments,
             commentsAnchor,
+            onDeleteClick,
             onUpvoteClick,
             onDownvoteClick
         } = this.props;
@@ -43,6 +44,7 @@ class CommentsSectionComponent extends Component {
                             {comments.map((comment) => (
                                 <ListComments key={comment.id}
                                               comment={comment}
+                                              onDeleteClick={onDeleteClick}
                                               onUpvoteClick={onUpvoteClick}
                                               onDownvoteClick={onDownvoteClick}
                                 />

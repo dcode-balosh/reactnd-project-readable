@@ -49,6 +49,7 @@ class Posts extends Component {
                 <CommentsSectionComponent
                     comments={comments}
                     commentsAnchor={commentsAnchor}
+                    onDeleteClick={this.onDeleteClick}
                     onUpvoteClick={this.onUpvoteClick}
                     onDownvoteClick={this.onDownvoteClick}
                 />

@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 class ListComments extends Component {
     render() {
         let {comment,
+            onDeleteClick,
             onUpvoteClick,
             onDownvoteClick} = this.props;
 
@@ -29,12 +30,14 @@ class ListComments extends Component {
                                 </div>
                             </div>
                             <div className="row text-center">
-                                <div className="col-md-3"><i className="fa fa-pencil"
-                                                             aria-hidden="true"/>
+                                <div className="col-md-3">
+                                    <NavLink exact to={`/comments/${comment.id}/edit`}>
+                                        <i className="fa fa-pencil" aria-hidden="true"/>
+                                    </NavLink>
                                 </div>
-                                <div className="col-md-3"><i className="fa fa-eraser"
-                                                             aria-hidden="true"/>
-                                </div>
+                                <NavLink excact to={{search: `?deletedComment=${comment.id}`}} onClick={() => onDeleteClick(comment.id)}>
+                                    <i className="fa fa-eraser" aria-hidden="true"/>
+                                </NavLink>
                                 <div className="col-md-3">
                                     <NavLink excact to={{search: `?upvotedComment=${comment.id}`}} onClick={() => onUpvoteClick(comment.id)}>
                                         <i className="fa fa-thumbs-o-up" aria-hidden="true"> +1</i>
