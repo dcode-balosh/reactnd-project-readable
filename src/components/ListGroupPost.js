@@ -2,21 +2,29 @@ import React, {Component} from "react";
 class ListGroupPost extends Component {
     constructor(props) {
         super(props);
+        let posts = this.handle_props(props);
+
         this.state = {
-            posts: []
+            posts
         };
     }
+
     componentWillReceiveProps(nextProps){
-        let posts = Object.values(nextProps.items);
-        // filter active category if needed
-        if(nextProps.category){
-            posts = posts.filter(post => post.category === nextProps.category);
-        }
-        // sort
-        posts = nextProps.sort(posts);
+        let posts = this.handle_props(nextProps);
         if(this.state.posts !== posts){
             this.setState({posts});
         }
+    }
+
+    handle_props(props) {
+        let posts = props.items ? Object.values(props.items) : [];
+        // filter active category if needed
+        if (props.category) {
+            posts = posts.filter(post => post.category === props.category);
+        }
+        // sort
+        posts = props.sort(posts);
+        return posts;
     }
 
     render() {
