@@ -68,17 +68,17 @@ class BodyPost extends Component {
                             </NavLink>
                         </div>
                         <div className="col-md-3">
-                            <NavLink excact to='/' onClick={() => onDeleteClick(post.id)}>
+                            <NavLink exact to='/' onClick={() => onDeleteClick(post.id)}>
                                 <i className="fa fa-eraser" aria-hidden="true"/>
                             </NavLink>
                         </div>
                         <div className="col-md-3">
-                            <NavLink excact to={{search: `?upvotedPost=${post.id}`}} onClick={() => onUpvoteClick(post.id)}>
+                            <NavLink exact to={{search: `?upvotedPost=${post.id}`}} onClick={() => onUpvoteClick(post.id)}>
                                 <i className="fa fa-thumbs-o-up" aria-hidden="true"> +1</i>
                             </NavLink>
                         </div>
                         <div className="col-md-3">
-                            <NavLink excact to={{search: `?downvotedPost=${post.id}`}} onClick={() => onDownvoteClick(post.id)}>
+                            <NavLink exact to={{search: `?downvotedPost=${post.id}`}} onClick={() => onDownvoteClick(post.id)}>
                                 <i className="fa fa-thumbs-o-down" aria-hidden="true"> -1</i>
                             </NavLink>
                         </div>
