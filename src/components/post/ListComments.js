@@ -1,14 +1,15 @@
 import React, {Component} from "react";
 import {NavLink} from "react-router-dom";
-
+import * as PostClickHelper from './PostClickHelper'
 class ListComments extends Component {
     render() {
-        let {comment,
+        let {
+            comment,
             location,
-            onDeleteClick,
-            onUpvoteClick,
-            onDownvoteClick} = this.props;
+            dispatch
+        } = this.props;
 
+        let modal = 'comment';
         return (
             <div className="col-md-12" key={comment.id}>
                 <div className="py-2">
@@ -37,17 +38,17 @@ class ListComments extends Component {
                                     </NavLink>
                                 </div>
                                 <div className="col-md-3">
-                                    <NavLink exact to={{search: `?deletedComment=${comment.id}`}} onClick={() => onDeleteClick(comment.id)}>
+                                    <NavLink exact to={{search: `?deletedComment=${comment.id}`}} onClick={() => PostClickHelper.onDeleteClick(dispatch,modal,comment.id)}>
                                         <i className="fa fa-eraser" aria-hidden="true"/>
                                     </NavLink>
                                 </div>
                                 <div className="col-md-3">
-                                    <NavLink exact to={{search: `?upvotedComment=${comment.id}`}} onClick={() => onUpvoteClick(comment.id)}>
+                                    <NavLink exact to={{search: `?upvotedComment=${comment.id}`}} onClick={() => PostClickHelper.onUpvoteClick(dispatch,modal,comment.id)}>
                                         <i className="fa fa-thumbs-o-up" aria-hidden="true"> +1</i>
                                     </NavLink>
                                 </div>
                                 <div className="col-md-3">
-                                    <NavLink exact to={{search: `?downvotedComment=${comment.id}`}} onClick={() => onDownvoteClick(comment.id)}>
+                                    <NavLink exact to={{search: `?downvotedComment=${comment.id}`}} onClick={() => PostClickHelper.onDownvoteClick(dispatch,modal,comment.id)}>
                                         <i className="fa fa-thumbs-o-down" aria-hidden="true"> -1</i>
                                     </NavLink>
                                 </div>

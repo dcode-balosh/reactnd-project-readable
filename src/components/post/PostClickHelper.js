@@ -1,24 +1,24 @@
 import * as Api from '../../Api'
-export function onDeleteClick(modal,id) {
+export function onDeleteClick(dispatch,modal,id) {
     switch(modal){
         case "post":
-            Api.deletePost(this.props.dispatch,id);
+            Api.deletePost(dispatch,id);
             break;
         case "comment":
-            Api.deleteComment(this.props.dispatch,id);
+            Api.deleteComment(dispatch,id);
             break;
         default:
             console.log(`Error no such modal ${modal}`)
     }
 }
 
-export function onUpvoteClick(modal,id) {
+export function onUpvoteClick(dispatch,modal,id) {
     switch(modal){
         case "post":
-            Api.votePost(this.props.dispatch,id,'upVote');
+            Api.votePost(dispatch,id,'upVote');
             break;
         case "comment":
-            Api.voteComment(this.props.dispatch,id,'upVote');
+            Api.voteComment(dispatch,id,'upVote');
             break;
         default:
             console.log(`Error no such modal ${modal}`)
@@ -26,13 +26,13 @@ export function onUpvoteClick(modal,id) {
 
 }
 
-export function onDownvoteClick(modal,id) {
+export function onDownvoteClick(dispatch,modal,id) {
     switch(modal){
         case "post":
-            Api.votePost(this.props.dispatch,id,'downVote');
+            Api.votePost(dispatch,id,'downVote');
             break;
         case "comment":
-            Api.voteComment(this.props.dispatch,id,'downVote');
+            Api.voteComment(dispatch,id,'downVote');
             break;
         default:
             console.log(`Error no such modal ${modal}`)

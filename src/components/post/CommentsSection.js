@@ -7,9 +7,7 @@ class CommentsSectionComponent extends Component {
         let {comments,
             commentsAnchor,
             location,
-            onDeleteClick,
-            onUpvoteClick,
-            onDownvoteClick
+            dispatch
         } = this.props;
 
         if(0 === comments.length){
@@ -67,9 +65,7 @@ class CommentsSectionComponent extends Component {
                                 <ListComments key={comment.id}
                                               comment={comment}
                                               location={location}
-                                              onDeleteClick={onDeleteClick}
-                                              onUpvoteClick={onUpvoteClick}
-                                              onDownvoteClick={onDownvoteClick}
+                                              dispatch={dispatch}
                                 />
                             ))}
                         </div>

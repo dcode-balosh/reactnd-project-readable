@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {NavLink} from "react-router-dom";
+import PostControls from "./PostControls";
 
 class BodyPost extends Component {
     // https://gist.githubusercontent.com/jlabresh1-code/4179576/raw/b86379b3d590422647e3d62e0b83e5090ec8f4e4/timestamp.js
@@ -24,9 +24,7 @@ class BodyPost extends Component {
             commentsLength,
             commentsAnchor,
             location,
-            onDeleteClick,
-            onUpvoteClick,
-            onDownvoteClick
+            dispatch
         } = this.props;
         return (
             <div className="bodyPostClass">
@@ -60,30 +58,12 @@ class BodyPost extends Component {
                     </div>
 
 
-                    <div className="row text-center">
-
-                        <div className="col-md-3">
-                            <NavLink exact to={`${location.pathname}/edit`}>
-                                <i className="fa fa-pencil" aria-hidden="true"/>
-                            </NavLink>
-                        </div>
-                        <div className="col-md-3">
-                            <NavLink exact to='/' onClick={() => onDeleteClick(post.id)}>
-                                <i className="fa fa-eraser" aria-hidden="true"/>
-                            </NavLink>
-                        </div>
-                        <div className="col-md-3">
-                            <NavLink exact to={{search: `?upvotedPost=${post.id}`}} onClick={() => onUpvoteClick(post.id)}>
-                                <i className="fa fa-thumbs-o-up" aria-hidden="true"> +1</i>
-                            </NavLink>
-                        </div>
-                        <div className="col-md-3">
-                            <NavLink exact to={{search: `?downvotedPost=${post.id}`}} onClick={() => onDownvoteClick(post.id)}>
-                                <i className="fa fa-thumbs-o-down" aria-hidden="true"> -1</i>
-                            </NavLink>
-                        </div>
-                    </div>
                 </div>
+
+                <PostControls location={location}
+                              dispatch={dispatch}
+                              post={post}
+                />
 
 
                 <div className="py-5">
