@@ -1,7 +1,6 @@
-import * as Actions from '../actions/index'
 const postsReducer = (state = {}, action) => {
     switch (action.type) {
-        case Actions.updatePosts().type:
+        case 'UPDATE_POSTS':
             return action.posts;
         default:
             return state
