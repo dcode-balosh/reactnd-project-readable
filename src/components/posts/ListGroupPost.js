@@ -18,9 +18,11 @@ class ListGroupPost extends Component {
 
     handle_props(props) {
         let posts = props.items ? Object.values(props.items) : [];
+
         // filter active category if needed
         if (props.category) {
-            posts = posts.filter(post => post.category === props.category);
+            let category = props.category.toLowerCase();
+            posts = posts.filter((post) => (0 === post.category.toLowerCase().localeCompare(category)) );
         }
         // sort
         posts = props.sort(posts);
@@ -31,7 +33,7 @@ class ListGroupPost extends Component {
         return (
             <ul className="list-group">
                 {this.state.posts.map((c, i) =>
-                    <a href={`${c.category}/${c.id}`}
+                    <a href={`/${c.category}/${c.id}`}
                        className="list-group-item list-group-item-action"
                     key={c.id}>
                         {`${c.title}`}
