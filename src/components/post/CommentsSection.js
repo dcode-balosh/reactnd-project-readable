@@ -66,6 +66,7 @@ class CommentsSectionComponent extends Component {
                             {comments.map((comment) => (
                                 <ListComments key={comment.id}
                                               comment={comment}
+                                              location={location}
                                               onDeleteClick={onDeleteClick}
                                               onUpvoteClick={onUpvoteClick}
                                               onDownvoteClick={onDownvoteClick}

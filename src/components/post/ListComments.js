@@ -4,6 +4,7 @@ import {NavLink} from "react-router-dom";
 class ListComments extends Component {
     render() {
         let {comment,
+            location,
             onDeleteClick,
             onUpvoteClick,
             onDownvoteClick} = this.props;
@@ -31,7 +32,7 @@ class ListComments extends Component {
                             </div>
                             <div className="row text-center">
                                 <div className="col-md-3">
-                                    <NavLink exact to={`/comments/${comment.id}/edit`}>
+                                    <NavLink exact to={`${location.pathname}/comments/${comment.id}/edit`}>
                                         <i className="fa fa-pencil" aria-hidden="true"/>
                                     </NavLink>
                                 </div>
