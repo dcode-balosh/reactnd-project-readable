@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import PostHeader from "../post/PostHeader";
+import PostControls from "../post/PostControls";
 class ListGroupPost extends Component {
     constructor(props) {
         super(props);
@@ -30,14 +32,29 @@ class ListGroupPost extends Component {
     }
 
     render() {
+        if(!this.props.commentsLengths){
+            return <div>Loading...</div>
+        }
+        let {
+            commentsLengths,
+            location,
+            dispatch
+        } = this.props;
         return (
             <ul className="list-group">
-                {this.state.posts.map((c, i) =>
-                    <a href={`/${c.category}/${c.id}`}
-                       className="list-group-item list-group-item-action"
-                    key={c.id}>
-                        {`${c.title}`}
-                    </a>
+                {this.state.posts.map((post, i) =>
+                    <div className="list-group-item text-center"
+                         key={post.id}>
+                        <a href={`/${post.category}/${post.id}`}>
+                            Go to post
+                        </a>
+                        <PostHeader post={post}
+                                    commentLength={commentsLengths[post.id]}
+                        />
+                        <PostControls location={location}
+                                      dispatch={dispatch}
+                                      post={post}/>
+                    </div>
                 )}
             </ul>
         )

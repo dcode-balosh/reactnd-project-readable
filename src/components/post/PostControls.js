@@ -9,7 +9,7 @@ function PostControls(props) {
         <div className="row text-center">
 
             <div className="col-md-3">
-                <NavLink exact to={`${location.pathname}/edit`}>
+                <NavLink exact to={`/${post.category}/${post.id}/edit`}>
                     <i className="fa fa-pencil" aria-hidden="true"/>
                 </NavLink>
             </div>

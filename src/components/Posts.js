@@ -15,17 +15,26 @@ class Posts extends Component {
     };
 
     render() {
-        let posts = this.props.posts;
+        let {
+            posts,
+            commentsLengths,
+            category,
+            dispatch,
+            location
+        } = this.props;
         return (
             <div className="posts-component">
                 <h1 className="posts-header">Posts</h1>
                 <ListGroupControls sortBy={this.sortBy}
-                location={this.props.location}/>
+                                   location={location}/>
                 <ListGroupPost items={posts}
                                keys={["id", "parent"]}
                                prefix="posts"
                                sort={this.state.sort}
-                               category={this.props.category}
+                               category={category}
+                               commentsLengths={commentsLengths}
+                               dispatch={dispatch}
+                               location={location}
                 />
             </div>
         )

@@ -28,8 +28,8 @@ const store = createStore(
     rootReducer,
     {
         categories: [],
-        posts: [],
-        comments: []
+        posts: {},
+        comments: {}
     },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
