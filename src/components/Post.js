@@ -14,6 +14,16 @@ class Posts extends Component {
         alert(`deleting ${id}`)
     }
 
+    onUpvoteClick(id) {
+        alert(`upvoting ${id}`)
+    }
+
+    onDownvoteClick(id) {
+        alert(`downvoting ${id}`)
+    }
+
+
+
     sortBy = (foo) => {
         this.setState({sort: foo})
     };
@@ -33,8 +43,15 @@ class Posts extends Component {
                           commentsAnchor={commentsAnchor}
                           location={location}
                           onDeleteClick={this.onDeleteClick}
+                          onUpvoteClick={this.onUpvoteClick}
+                          onDownvoteClick={this.onDownvoteClick}
                 />
-                <CommentsSectionComponent comments={comments} commentsAnchor={commentsAnchor}/>
+                <CommentsSectionComponent
+                    comments={comments}
+                    commentsAnchor={commentsAnchor}
+                    onUpvoteClick={this.onUpvoteClick}
+                    onDownvoteClick={this.onDownvoteClick}
+                />
             </div>
         )
     }

@@ -3,7 +3,11 @@ import ListComments from "./ListComments";
 
 class CommentsSectionComponent extends Component {
     render() {
-        let {comments, commentsAnchor} = this.props;
+        let {comments,
+            commentsAnchor,
+            onUpvoteClick,
+            onDownvoteClick
+        } = this.props;
 
         if(0 === comments.length){
             return(
@@ -37,7 +41,11 @@ class CommentsSectionComponent extends Component {
                     <div className="container">
                         <div className="row">
                             {comments.map((comment) => (
-                                <ListComments key={comment.id} comment={comment}/>
+                                <ListComments key={comment.id}
+                                              comment={comment}
+                                              onUpvoteClick={onUpvoteClick}
+                                              onDownvoteClick={onDownvoteClick}
+                                />
                             ))}
                         </div>
                     </div>

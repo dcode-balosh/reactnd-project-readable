@@ -1,8 +1,11 @@
 import React, {Component} from "react";
+import {NavLink} from "react-router-dom";
 
 class ListComments extends Component {
     render() {
-        let {comment} = this.props;
+        let {comment,
+            onUpvoteClick,
+            onDownvoteClick} = this.props;
 
         return (
             <div className="col-md-12" key={comment.id}>
@@ -32,10 +35,16 @@ class ListComments extends Component {
                                 <div className="col-md-3"><i className="fa fa-eraser"
                                                              aria-hidden="true"/>
                                 </div>
-                                <div className="col-md-3"><i className="fa fa-thumbs-o-up"
-                                                             aria-hidden="true"> +1</i></div>
-                                <div className="col-md-3"><i className="fa fa-thumbs-o-down"
-                                                             aria-hidden="true"> -1</i></div>
+                                <div className="col-md-3">
+                                    <NavLink excact to={{search: `?upvotedComment=${comment.id}`}} onClick={() => onUpvoteClick(comment.id)}>
+                                        <i className="fa fa-thumbs-o-up" aria-hidden="true"> +1</i>
+                                    </NavLink>
+                                </div>
+                                <div className="col-md-3">
+                                    <NavLink excact to={{search: `?downvotedComment=${comment.id}`}} onClick={() => onDownvoteClick(comment.id)}>
+                                        <i className="fa fa-thumbs-o-down" aria-hidden="true"> -1</i>
+                                    </NavLink>
+                                </div>
                             </div>
                         </div>
                     </div>
