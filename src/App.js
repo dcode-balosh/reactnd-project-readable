@@ -6,7 +6,7 @@ import ColMd12 from "./components/ColMd12";
 import CategoriesContainer from "./containers/CategoriesContainer";
 import PostsContainer from "./containers/PostsContainer";
 import PostContainer from "./containers/PostContainer";
-import FormPostContainer from "./containers/FormPostContainer";
+import FormContainer from "./containers/FormContainer";
 
 class App extends Component {
     onNewPostSubmit(data) {
@@ -35,13 +35,15 @@ class App extends Component {
                         }/>
                         <Route exact path="/posts/new" render={({location, match}) =>
                             <div className="App">
-                                <FormPostContainer onNewPostSubmit={this.onNewPostSubmit}/>
+                                <FormContainer modal='posts'
+                                               onNewPostSubmit={this.onNewPostSubmit}/>
                             </div>
                         }/>
                         <Route exact path="/posts/:postId/edit" render={({location, match}) =>
                             <div className="App">
-                                <FormPostContainer onNewPostSubmit={this.onNewPostSubmit}
-                                                   postId={match.params.postId}/>
+                                <FormContainer modal='posts'
+                                    onNewPostSubmit={this.onNewPostSubmit}
+                                                   modalId={match.params.postId}/>
                             </div>
                         }/>
                         <Route exact path="/posts/:postId" render={({location, match}) =>

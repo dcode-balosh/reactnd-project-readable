@@ -1,19 +1,27 @@
 import React, {Component} from "react";
-import schema from "../schemas/post.js"
+import postSchema from "../schemas/post.js"
 
 class FormPost extends Component {
     constructor(props) {
         super(props);
+        let schema = () => null;
+        switch (props.modal) {
+            case 'posts':
+                schema = postSchema;
+                break;
+        }
+
         this.state = {
             onNewPostSubmit: props.onNewPostSubmit,
-            post: props.post
+            data: props.data,
+            schema
         };
     }
 
-    form_render(onNewPostSubmit,post) {
+    form_render(onNewPostSubmit,data,schema) {
         window.$("#form").alpaca({
             "schema": schema(),
-            "data": post,
+            "data": data,
             "options": {
                 "form": {
                     "buttons": {
@@ -35,15 +43,18 @@ class FormPost extends Component {
     }
 
     componentDidMount() {
-        this.form_render(this.state.onNewPostSubmit,this.state.post);
+        this.form_render(this.state.onNewPostSubmit,this.state.data,this.state.schema);
     }
 
     componentWillReceiveProps(nextProps){
         if(nextProps.onNewPostSubmit !== this.state.onNewPostSubmit){
             this.setState({onNewPostSubmit: nextProps.onNewPostSubmit})
         }
-        if(nextProps.post !== this.state.post){
-            this.setState({post: nextProps.post})
+        if(nextProps.data !== this.state.data){
+            this.setState({data: nextProps.data})
+        }
+        if(nextProps.modal !== this.state.modal){
+            this.setState({modal: nextProps.modal})
         }
     }
 
