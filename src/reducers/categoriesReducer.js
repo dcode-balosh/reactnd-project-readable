@@ -1,7 +1,9 @@
+import {categories} from '../init_data/categories';
+
 const categoriesReducer = (state = {}, action) => {
     switch (action.type) {
         case 'INIT':
-            let new_state = ['category_one', 'category_two', 'category_three'];
+            let new_state = categories;
             return new_state;
         default:
             return state
@@ -9,4 +11,3 @@ const categoriesReducer = (state = {}, action) => {
 };
 
 export default categoriesReducer;
-

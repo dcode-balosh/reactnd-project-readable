@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import ListGroup from './ListGroup'
+import ListGroupPost from './ListGroupPost'
 import ListGroupControls from './ListGroupControls'
 class Posts extends Component {
     render() {
@@ -8,7 +8,7 @@ class Posts extends Component {
             <div className="posts-component">
                 <h1 className="posts-header">Posts</h1>
                 <ListGroupControls/>
-                <ListGroup items={posts} prefix="posts"/>
+                <ListGroupPost items={posts} keys={["id","parent"]} prefix="posts"/>
             </div>
         )
     }
