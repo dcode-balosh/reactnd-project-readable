@@ -176,13 +176,16 @@ export const updatePostsState = (dispatch) => {
     dispatch(Actions.updatePosts(posts))
     )
 };
+
 export const updateCommentsState = (dispatch) => {
-    getPosts().then(posts => {
-        dispatch(Actions.emptyComments());
-        return Object.keys(posts).map((postId) => {
-                return getPostComments(postId).then(comments =>
-                    dispatch(Actions.updateComments(comments)))
-            }
-        )
+    getPosts().then((posts) => {
+        let actions = Object.keys(posts).map((postId) => getPostComments(postId) ); //https://stackoverflow.com/questions/31413749/node-js-promise-all-and-foreach
+        let results = Promise.all(actions);
+        results.then(
+            (result) => {
+                console.log(result);
+                let comments = result.reduce((acu,cur) => ({...acu,...cur}) , {} ) ;
+                dispatch(Actions.updateComments(comments));
+            });
     })
 };
