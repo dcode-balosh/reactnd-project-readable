@@ -5,6 +5,7 @@ import "./App.css";
 import ColMd12 from "./components/ColMd12";
 import CategoriesContainer from "./containers/CategoriesContainer";
 import PostsContainer from "./containers/PostsContainer";
+import PostContainer from "./containers/PostContainer";
 
 class App extends Component {
     render() {
@@ -27,9 +28,15 @@ class App extends Component {
                                                          category={match.params.category}/></ColMd12>
                             </div>
                         }/>
-                        <Route path="/posts" render={() =>
-                            <span>#TBD new post view</span>
+                        <Route exact path="/posts/:postId" render={({location,match}) =>
+                            <div className="App">
+                                <PostContainer location={location}
+                                                       postId={match.params.postId}
+                                />
+                            </div>
                         }/>
+
+
                     </Switch>
                 </div>
             </Router>
