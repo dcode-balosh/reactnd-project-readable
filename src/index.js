@@ -5,6 +5,7 @@ import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
+import "alpaca/dist/alpaca/bootstrap/alpaca.css"
 // ################################## end
 // ################################## Redux
 import {createStore} from "redux";
@@ -14,8 +15,13 @@ import rootReducer from "./reducers/index";
 import {init} from "./actions/index";
 
 // ################################## Bootstrap js
-window.jQuery = window.$ = require('jquery/dist/jquery.min.js');
-require('bootstrap/dist/js/bootstrap.bundle.min.js');
+window.jQuery = window.$ = require('jquery/dist/jquery.js');
+
+window.Popper = require('popper.js/dist/popper.js');
+
+require('bootstrap/dist/js/bootstrap.js');
+
+require('alpaca/dist/alpaca/bootstrap/alpaca.js');
 // ################################## end
 
 
