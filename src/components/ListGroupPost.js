@@ -1,13 +1,14 @@
 import React, {Component} from "react";
 class ListGroupPost extends Component {
     render() {
+        let sorted_posts = this.props.sort(Object.values(this.props.items));
         return (
             <ul className="list-group">
-                {Object.keys(this.props.items).map((c, i) =>
-                    <a href={`/${this.props.prefix}/${c}`}
+                {sorted_posts.map((c, i) =>
+                    <a href={`/${this.props.prefix}/${c.id}`}
                        className="list-group-item list-group-item-action"
-                    key={i}>
-                        {`${c}`}
+                    key={c.id}>
+                        {`${c.title}`}
                     </a>
                 )}
             </ul>

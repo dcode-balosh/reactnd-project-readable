@@ -8,7 +8,12 @@ class Posts extends Component {
             <div className="posts-component">
                 <h1 className="posts-header">Posts</h1>
                 <ListGroupControls/>
-                <ListGroupPost items={posts} keys={["id","parent"]} prefix="posts"/>
+                <ListGroupPost items={posts}
+                               keys={["id","parent"]}
+                               prefix="posts"
+                               sort={ (arr) => arr.sort( (a,b) => (a.voteScore - b.voteScore) ) }
+
+                />
             </div>
         )
     }
