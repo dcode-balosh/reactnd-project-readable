@@ -6,9 +6,13 @@ import ColMd12 from "./components/ColMd12";
 import CategoriesContainer from "./containers/CategoriesContainer";
 import PostsContainer from "./containers/PostsContainer";
 import PostContainer from "./containers/PostContainer";
-import NewPost from "./components/NewPost";
+import FormPost from "./components/FormPost";
 
 class App extends Component {
+    onNewPostSubmit(data){
+        alert(`Submitted with:\n${JSON.stringify(data)}`)
+    }
+
     render() {
         return (
             <Router>
@@ -31,7 +35,7 @@ class App extends Component {
                         }/>
                         <Route exact path="/posts/new" render={({location,match}) =>
                             <div className="App">
-                                <NewPost/>
+                                <FormPost onNewPostSubmit={this.onNewPostSubmit}/>
                             </div>
                         }/>
                         <Route exact path="/posts/:postId" render={({location,match}) =>
