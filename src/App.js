@@ -8,6 +8,7 @@ import PostsContainer from "./containers/PostsContainer";
 import PostContainer from "./containers/PostContainer";
 import FormContainer from "./containers/FormContainer";
 import {init} from "./actions/index";
+import * as Api from './Api'
 
 class App extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class App extends Component {
 
     componentDidMount() {
         this.state.dispatch(init());
+        Api.updatePostsState(this.state.dispatch);
     }
 
     onNewPostSubmit(data) {
