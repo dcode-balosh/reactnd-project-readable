@@ -15,7 +15,7 @@ import {init} from "./actions/index";
 
 // ################################## Bootstrap js
 window.jQuery = window.$ = require('jquery/dist/jquery.min.js');
-require('bootstrap/dist/js/bootstrap.min.js');
+require('bootstrap/dist/js/bootstrap.bundle.min.js');
 // ################################## end
 
 
