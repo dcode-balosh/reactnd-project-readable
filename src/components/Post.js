@@ -10,12 +10,16 @@ class Posts extends Component {
         };
     }
 
+    onDeleteClick(id) {
+        alert(`deleting ${id}`)
+    }
+
     sortBy = (foo) => {
         this.setState({sort: foo})
     };
 
     render() {
-        let {post, comments} = this.props;
+        let {post, comments, location} = this.props;
         const commentsAnchor = 'commentsHeaderId';
         {
             console.log(this.props)
@@ -27,7 +31,12 @@ class Posts extends Component {
 
         return (
             <div className="post-component">
-                <BodyPost post={post} commentsLength={comments.length} commentsAnchor={commentsAnchor}/>
+                <BodyPost post={post}
+                          commentsLength={comments.length}
+                          commentsAnchor={commentsAnchor}
+                          location={location}
+                          onDeleteClick={this.onDeleteClick}
+                />
                 <CommentsSectionComponent comments={comments} commentsAnchor={commentsAnchor}/>
             </div>
         )
