@@ -23,9 +23,23 @@ class App extends Component {
         Api.updatePostsState(this.state.dispatch);
     }
 
-    onNewPostSubmit(data) {
+    onNewPostSubmit(history,{title,body,author,category}) {
+        Api.newPost(this.state.dispatch,title,body,author,category);
+        history.push('/')
+    }
+    onEditPostSubmit(history,postId,{title,body}) {
+        Api.updatePost(this.state.dispatch,postId,title,body);
+        history.push(`/posts/${postId}`)
+
+    }
+    onNewCommentsSubmit(data) {
         alert(`Submitted with:\n${JSON.stringify(data)}`)
     }
+    onEditCommentsSubmit(data) {
+        alert(`Submitted with:\n${JSON.stringify(data)}`)
+    }
+
+
 
     render() {
         return (
@@ -47,16 +61,16 @@ class App extends Component {
                                                          category={match.params.category}/></ColMd12>
                             </div>
                         }/>
-                        <Route exact path="/posts/new" render={({location, match}) =>
+                        <Route exact path="/posts/new" render={({history,location, match}) =>
                             <div className="App">
                                 <FormContainer modal='posts'
-                                               onNewPostSubmit={this.onNewPostSubmit}/>
+                                               onNewPostSubmit={this.onNewPostSubmit.bind(this,history)}/>
                             </div>
                         }/>
-                        <Route exact path="/posts/:postId/edit" render={({location, match}) =>
+                        <Route exact path="/posts/:postId/edit" render={({history,location, match}) =>
                             <div className="App">
                                 <FormContainer modal='posts'
-                                    onNewPostSubmit={this.onNewPostSubmit}
+                                    onNewPostSubmit={this.onEditPostSubmit.bind(this,history,match.params.postId)}
                                                    modalId={match.params.postId}/>
                             </div>
                         }/>
@@ -70,14 +84,14 @@ class App extends Component {
                         <Route exact path="/posts/:postId/comments/:commentId/edit" render={({location, match}) =>
                             <div className="App">
                                 <FormContainer modal='comments'
-                                               onNewPostSubmit={this.onNewPostSubmit}
+                                               onNewPostSubmit={this.onNewCommentsSubmit}
                                                modalId={match.params.commentId}/>
                             </div>
                         }/>
                         <Route exact path="/posts/:postId/comments/new" render={({location, match}) =>
                             <div className="App">
                                 <FormContainer modal='comments'
-                                               onNewPostSubmit={this.onNewPostSubmit}/>
+                                               onNewPostSubmit={this.onEditCommentsSubmit}/>
                             </div>
                         }/>
 
