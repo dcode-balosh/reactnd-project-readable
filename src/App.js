@@ -21,6 +21,7 @@ class App extends Component {
     componentDidMount() {
         this.state.dispatch(init());
         Api.updatePostsState(this.state.dispatch);
+        Api.updateCommentsState(this.state.dispatch)
     }
 
     onNewPostSubmit(history,{title,body,author,category}) {

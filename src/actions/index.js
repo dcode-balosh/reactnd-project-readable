@@ -8,6 +8,6 @@ export const updatePosts = (posts) => ({
 });
 
 export const updateComments = (comments) => ({
-    type: 'UPDATE_POSTS',
+    type: 'UPDATE_COMMENTS',
     comments
 });
