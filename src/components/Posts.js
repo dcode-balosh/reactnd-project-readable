@@ -3,7 +3,7 @@ import ListGroup from './ListGroup'
 import ListGroupControls from './ListGroupControls'
 class Posts extends Component {
     render() {
-        let posts = ['post-one', 'post-two', 'post-three'];
+        let posts = this.props.posts;
         return (
             <div className="posts-component">
                 <h1 className="posts-header">Posts</h1>

@@ -1,19 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-
-// ################################## Bootstrap css
-import 'bootstrap/dist/css/bootstrap.css';
-import 'font-awesome/css/font-awesome.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import registerServiceWorker from "./registerServiceWorker";
+import "bootstrap/dist/css/bootstrap.css";
+import "font-awesome/css/font-awesome.css";
 // ################################## end
-
 // ################################## Redux
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import rootReducer from './reducers/index'
+import {createStore} from "redux";
+import {Provider} from "react-redux";
+import rootReducer from "./reducers/index";
 // ################################## end
 
 // ################################## Bootstrap js
@@ -24,7 +20,10 @@ require('bootstrap/dist/js/bootstrap.min.js');
 
 const store = createStore(
     rootReducer,
-    /* preloadedState, */
+    {
+        categories: ['category_one'],
+        posts: ['post_one']
+    },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
